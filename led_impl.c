@@ -54,37 +54,37 @@ void Init_Leds(void){
 
 void Led1_Callback(bool phyState){
     if(phyState == true){
-        IO_RB6_SetHigh();
+        LED_1_SetHigh();
     }
     else{
-        IO_RB6_SetLow();
+        LED_1_SetLow();
     }
 }
 
 void Led2_Callback(bool phyState){
     if(phyState == true){
-        IO_RB7_SetHigh();
+        LED_2_SetHigh();
     }
     else{
-        IO_RB7_SetLow();
+        LED_2_SetLow();
     }
 }
 
 void Led3_Callback(bool phyState){
     if(phyState == true){
-        IO_RB8_SetHigh();
+        LED_3_SetHigh();
     }
     else{
-        IO_RB8_SetLow();
+        LED_3_SetLow();
     }
 }
 
 void Led4_Callback(bool phyState){
     if(phyState == true){
-        IO_RB9_SetHigh();
+        LED_4_SetHigh();
     }
     else{
-        IO_RB9_SetLow();
+        LED_4_SetLow();
     }
 }
 

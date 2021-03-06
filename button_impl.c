@@ -40,7 +40,7 @@ void Button1_releaseCallback(void){
 }
 
 bool Button1_getButtonPhyState(void){
-    if(IO_RB12_GetValue() == 1){
+    if(BUTTON_1_GetValue() == 1){
         return false;
     }
     else{
@@ -103,7 +103,7 @@ void Button2_releaseCallback(void){
 }
 
 bool Button2_getButtonPhyState(void){
-    if(IO_RB13_GetValue() == 1){
+    if(BUTTON_2_GetValue() == 1){
         return false;
     }
     else{

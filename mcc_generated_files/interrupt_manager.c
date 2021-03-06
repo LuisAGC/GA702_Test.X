@@ -52,9 +52,6 @@
 */
 void INTERRUPT_Initialize (void)
 {
-    //    TI: T1 - Timer1
-    //    Priority: 1
-        IPC0bits.T1IP = 1;
     //    UERI: U1E - UART1 Error
     //    Priority: 1
         IPC16bits.U1ERIP = 1;
@@ -64,5 +61,14 @@ void INTERRUPT_Initialize (void)
     //    URXI: U1RX - UART1 Receiver
     //    Priority: 1
         IPC2bits.U1RXIP = 1;
+    //    MICI: MI2C1 - I2C1 Master Events
+    //    Priority: 1
+        IPC4bits.MI2C1IP = 1;
+    //    DMA0I: DMA0 - Direct Memory Access 0
+    //    Priority: 1
+        IPC1bits.DMA0IP = 1;
+    //    TI: T1 - Timer1
+    //    Priority: 1
+        IPC0bits.T1IP = 1;
 
 }
