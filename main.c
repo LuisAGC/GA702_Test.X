@@ -66,6 +66,7 @@
 #include "at_parser_impl.h"
 #include "i2c_lcd_dma.h"
 #include "i2c_lcd_dma_impl.h"
+#include "menu/MicroMenu.h"
 
 
 /*
@@ -73,10 +74,7 @@
  */
 
 volatile bool TMR1_Overflowed = false;
-uint16_t millis = 0;
-uint32_t seconds = 0;
-char textBuffer[21];
-const char textTemplate[] = "%010lu";
+uint16_t millisMenuCallback = 0;
 
 void TMR1_OverflowHandler(void)
 {
@@ -91,15 +89,15 @@ int main(void)
     TMR1_SetInterruptHandler(&TMR1_OverflowHandler);
     IEC1bits.MI2C1IE = 0;
     INTERRUPT_GlobalEnable();
-    __delay_ms(50);
+    __delay_ms(100);
+    LCD_Init();
+    LCD_SendDMAData(lcdBuffer, lcdBufferIndex, 0x40);
+    __delay_ms(100);
     Init_Leds();
     Init_Parser();
-    LCD_Init();
-    LCD_AppendGoto(0,0);
-    LCD_AppendString("Hello World!!!");
-    LCD_AppendGoto(1,0);
-    LCD_AppendString("PIC24 On:");
-    LCD_SendDMAData(lcdBuffer, lcdBufferIndex, 0x40);
+    Init_Buttons();
+    OC1_SecondaryValueSet(0xFFFF);
+    OC1_PrimaryValueSet(0x0001);
     printf("SYSTEM STARTED: READY TO RECEIVE COMMANDS\r\n");
     while (1) {
         if(TMR1_Overflowed == true){
@@ -110,20 +108,23 @@ int main(void)
             Led_Ticker(&led4, LED_TICK);
             Button_Ticker(&button1);
             Button_Ticker(&button2);
-            millis++;
+            Button_Ticker(&button3);
+            millisMenuCallback++;
         }
+        
+        if(millisMenuCallback > 200){
+            millisMenuCallback = 0;
+            if(button1_longPressed == true){
+                MENU_SELECT;
+            }
+            if(button2_longPressed == true){
+                MENU_ENTER;
+            }
+        }
+        
         if(UART1_IsRxReady()){
           AT_Ticker(&atCommandParserSingleton, UART1_Read());          
         }           
-        if(millis > 999){
-            millis = 0;
-            lcdBufferIndex = 1;
-            sprintf(textBuffer, textTemplate, seconds);
-            seconds++;
-            LCD_AppendGoto(2,0);
-            LCD_AppendString(textBuffer);
-            LCD_SendDMAData(lcdBuffer, lcdBufferIndex, 0x40);
-        }
     }
     return 1;
 }

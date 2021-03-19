@@ -1,9 +1,7 @@
 #include "button_impl.h"
 #include "led_impl.h"
+#include "menu/menu_impl.h"
 #include "mcc_generated_files/pin_manager.h"
-
-Led *currentLedInstance = &led1;
-uint16_t currentLedNum = 1;
 
 Button button1 = {
     .buttonLongPressCallbackFn = Button1_longPressCallback,
@@ -12,8 +10,8 @@ Button button1 = {
     .currentStateFn = Button_Idle,
     .currentTicks = 0,
     .getButtonPhysicalStateCallbackFn = Button1_getButtonPhyState,
-    .longPressTicks = 1500,
-    .stabilizationTicks = 20
+    .longPressTicks = 800,
+    .stabilizationTicks = 10
 };
 
 Button button2 = {
@@ -23,90 +21,87 @@ Button button2 = {
     .currentStateFn = Button_Idle,
     .currentTicks = 0,
     .getButtonPhysicalStateCallbackFn = Button2_getButtonPhyState,
-    .longPressTicks = 1500,
-    .stabilizationTicks = 20
+    .longPressTicks = 800,
+    .stabilizationTicks = 10
 };
 
+Button button3 = {
+    .buttonLongPressCallbackFn = Button3_longPressCallback,
+    .buttonShortPressCallbackFn = Button3_shortPressCallback,
+    .buttonReleasedCallbackFn = Button3_releaseCallback,
+    .currentStateFn = Button_Idle,
+    .currentTicks = 0,
+    .getButtonPhysicalStateCallbackFn = Button3_getButtonPhyState,
+    .longPressTicks = 800,
+    .stabilizationTicks = 10
+};
+
+bool button1_longPressed = false;
+bool button2_longPressed = false;
+
+void Init_Buttons(){
+    Menu_Navigate(&MainMenu_LedState);
+}
+
 void Button1_shortPressCallback(void){
-    Led_Ticker(currentLedInstance, LED_TOGGLE);
+    Menu_Navigate(MENU_PREVIOUS);
 }
 
 void Button1_longPressCallback(void){
-    Led_Ticker(currentLedInstance, LED_PULSE);
+    button1_longPressed = true;
 }
 
 void Button1_releaseCallback(void){
-    
+    button1_longPressed = false;
 }
 
 bool Button1_getButtonPhyState(void){
     if(BUTTON_1_GetValue() == 1){
-        return false;
+        return true;
     }
     else{
-        return true;
+        return false;
     }
 }
 
 void Button2_shortPressCallback(void){
-    switch(currentLedNum){
-        case 1:
-            currentLedInstance = &led2;
-            currentLedNum = 2;
-            break;
-        case 2:
-            currentLedInstance = &led3;
-            currentLedNum = 3;
-            break;
-        case 3:
-            currentLedInstance = &led4;
-            currentLedNum = 4;
-            break;
-        case 4:
-            currentLedInstance = &led1;
-            currentLedNum = 1;
-            break;
-        default:
-            currentLedInstance = &led1;
-            currentLedNum = 1;
-            break;
-    }
+    Menu_Navigate(MENU_NEXT);
 }
 
 void Button2_longPressCallback(void){
-    switch(currentLedNum){
-        case 1:
-            currentLedInstance = &led4;
-            currentLedNum = 4;
-            break;
-        case 2:
-            currentLedInstance = &led1;
-            currentLedNum = 1;
-            break;
-        case 3:
-            currentLedInstance = &led2;
-            currentLedNum = 2;
-            break;
-        case 4:
-            currentLedInstance = &led3;
-            currentLedNum = 3;
-            break;
-        default:
-            currentLedInstance = &led1;
-            currentLedNum = 1;
-            break;
-    }
+    button2_longPressed = true;
 }
 
 void Button2_releaseCallback(void){
-
+    button2_longPressed = false;;
 }
 
 bool Button2_getButtonPhyState(void){
     if(BUTTON_2_GetValue() == 1){
-        return false;
+        return true;
     }
     else{
+        return false;
+    }
+}
+
+void Button3_shortPressCallback(void){
+    Menu_Navigate(MENU_CHILD);
+}
+
+void Button3_longPressCallback(void){
+    Menu_Navigate(MENU_PARENT);
+}
+
+void Button3_releaseCallback(void){
+    
+}
+
+bool Button3_getButtonPhyState(void){
+    if(BUTTON_3_GetValue() == 1){
         return true;
+    }
+    else{
+        return false;
     }
 }

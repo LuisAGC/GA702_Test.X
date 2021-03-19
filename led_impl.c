@@ -46,10 +46,10 @@ Led led4 = {
 };
 
 void Init_Leds(void){
-    Led_Ticker(&led1, LED_PULSE);
-    Led_Ticker(&led2, LED_PULSE);
-    Led_Ticker(&led3, LED_PULSE);
-    Led_Ticker(&led4, LED_PULSE);
+    Led_Ticker(&led1, LED_OFF);
+    Led_Ticker(&led2, LED_OFF);
+    Led_Ticker(&led3, LED_OFF);
+    Led_Ticker(&led4, LED_OFF);
 }
 
 void Led1_Callback(bool phyState){

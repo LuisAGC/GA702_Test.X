@@ -51,13 +51,13 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#include "oc1.h"
-#include "tmr1.h"
 #include "uart1.h"
 #include "i2c1.h"
+#include "tmr1.h"
 #include "interrupt_manager.h"
 #include "traps.h"
 #include "dma.h"
+#include "oc1.h"
 
 #warning "This file will be removed in future MCC releases. Use system.h instead."
 

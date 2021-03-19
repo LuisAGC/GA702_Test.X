@@ -97,19 +97,19 @@
 #include "pin_manager.h"
 #include "clock.h"
 #include "system.h"
-#include "oc1.h"
-#include "tmr1.h"
 #include "uart1.h"
 #include "i2c1.h"
+#include "tmr1.h"
 #include "interrupt_manager.h"
 #include "traps.h"
 #include "dma.h"
+#include "oc1.h"
 
 void SYSTEM_Initialize(void)
 {
     PIN_MANAGER_Initialize();
-    CLOCK_Initialize();
     INTERRUPT_Initialize();
+    CLOCK_Initialize();
     I2C1_Initialize();
     UART1_Initialize();
     OC1_Initialize();

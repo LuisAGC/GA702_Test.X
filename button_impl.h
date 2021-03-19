@@ -11,6 +11,10 @@ extern "C" {
 
     extern Button button1;
     extern Button button2;
+    extern Button button3;
+    
+    extern bool button1_longPressed;
+    extern bool button2_longPressed;
     
     void Button1_shortPressCallback(void);
     void Button1_longPressCallback(void);
@@ -21,6 +25,13 @@ extern "C" {
     void Button2_longPressCallback(void);
     void Button2_releaseCallback(void);
     bool Button2_getButtonPhyState(void);
+    
+    void Button3_shortPressCallback(void);
+    void Button3_longPressCallback(void);
+    void Button3_releaseCallback(void);
+    bool Button3_getButtonPhyState(void);
+    
+    void Init_Buttons(void);
     
 #ifdef	__cplusplus
 }
