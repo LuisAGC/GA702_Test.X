@@ -45,26 +45,26 @@ void PWM_DutyInc(void){
     uint16_t duty = OC1R;
     duty++;
     OC1R = duty;
-    MENU_RENDER;
+    MENU_RENDER();
 }
 
 void PWM_DutyDec(void){
     uint16_t duty = OC1R;
     duty--;
     OC1R = duty;
-    MENU_RENDER;
+    MENU_RENDER();
 }
 
 void PWM_PeriodInc(void){
     uint16_t period = OC1RS;
     period++;
     OC1RS = period;
-    MENU_RENDER;
+    MENU_RENDER();
 }
 
 void PWM_PeriodDec(void){
     uint16_t period = OC1RS;
     period--;
     OC1RS = period;
-    MENU_RENDER;
+    MENU_RENDER();
 }

@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include "at_parser_impl.h"
+#include "menu/ledstate_menu_callback.h"
+#include "menu/MicroMenu.h"
 
 void Init_Parser(void){
     atCommandParserSingleton.callbackFn = commandSuccessfullyParsed;
@@ -31,22 +33,30 @@ void commandLedState(ATCommand *command){
             switch(command->data[0]){
                 case 1:
                     printf("Led 1 is now ");
+                    led1CurrentState = command->data[1];
                     commandChangeLedState(&led1, command->data[1]);
                     break;
                 case 2:
                     printf("Led 2 is now ");
+                    led2CurrentState = command->data[1];
                     commandChangeLedState(&led2, command->data[1]);
                     break;
                 case 3:
                     printf("Led 3 is now ");
+                    led3CurrentState = command->data[1];
                     commandChangeLedState(&led3, command->data[1]);
                     break;
                 case 4:
                     printf("Led 4 is now ");
+                    led4CurrentState = command->data[1];
                     commandChangeLedState(&led4, command->data[1]);
                     break;
                 case 5:
                     printf("All Leds are now:\r\n");
+                    led1CurrentState = command->data[1];
+                    led2CurrentState = command->data[1];
+                    led3CurrentState = command->data[1];
+                    led4CurrentState = command->data[1];
                     commandChangeLedState(&led1, command->data[1]);
                     commandChangeLedState(&led2, command->data[1]);
                     commandChangeLedState(&led3, command->data[1]);
@@ -82,6 +92,7 @@ void commandLedState(ATCommand *command){
         default:
             break;
     }
+    MENU_RENDER();
 }
 
 void commandChangeLedPulse(Led *ledInstance, uint16_t pulses, uint16_t pulseLow, uint16_t pulseHigh){
@@ -162,6 +173,7 @@ void commandLedPulse(ATCommand *command){
         default:
             break;
     }
+    MENU_RENDER();
 }
 
 void commandPwmPeriod(ATCommand *command){
@@ -175,6 +187,7 @@ void commandPwmPeriod(ATCommand *command){
             printf("PWM Period is set to %u\r\n", OC1_secondaryValue);
             break;
     }
+    MENU_RENDER();
 }
 
 void commandPwmDuty(ATCommand *command){
@@ -188,6 +201,7 @@ void commandPwmDuty(ATCommand *command){
             printf("PWM Duty is set to %u\r\n", OC1_primaryValue);
             break;
     }
+    MENU_RENDER();
 }
 
 void commandSuccessfullyParsed(ATCommand *command){

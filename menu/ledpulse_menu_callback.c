@@ -135,7 +135,7 @@ static inline void LedPulse_PulseHighHelper(Led *led, bool increment){
     else{
         led->pulseHighDurationTicks--;
     }
-    MENU_RENDER;
+    MENU_RENDER();
 }
 
 static inline void LedPulse_PulseLowHelper(Led *led, bool increment){
@@ -145,7 +145,7 @@ static inline void LedPulse_PulseLowHelper(Led *led, bool increment){
     else{
         led->pulseLowDurationTicks--;
     }
-    MENU_RENDER;
+    MENU_RENDER();
 }
 
 static inline void LedPulse_PulsesHelper(Led *led, bool increment){
@@ -159,7 +159,7 @@ static inline void LedPulse_PulsesHelper(Led *led, bool increment){
     if(led->pulsesAmount < 0){
         led->pulsesAmount = -1;
     }
-    MENU_RENDER;
+    MENU_RENDER();
 }
 
 void LedPulse_1_PulseHighInc(void){

@@ -44,7 +44,7 @@ void Menu_Navigate(Menu_Item_t* NewMenu)
 
 	void (*RenderCallback)(void) = CurrentMenuItem->RenderCallback;
 
-	if (RenderCallback)
+	if (RenderCallback != NULL)
 		RenderCallback();
 }
 
@@ -61,7 +61,7 @@ void Menu_EnterCurrentItem(void)
 
 	void (*EnterCallback)(void) = CurrentMenuItem->EnterCallback;
 
-	if (EnterCallback)
+	if (EnterCallback != NULL)
 		EnterCallback();
 }
 
@@ -72,6 +72,6 @@ void Menu_SelectCurrentItem(void)
 
 	void (*SelectCallback)(void) = CurrentMenuItem->SelectCallback;
 
-	if (SelectCallback)
+	if (SelectCallback != NULL)
 		SelectCallback();
 }

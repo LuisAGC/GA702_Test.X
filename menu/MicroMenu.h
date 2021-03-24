@@ -56,13 +56,13 @@
 	#define MENU_PREVIOUS       Menu_GetCurrentMenu()->Previous
 
     /** Relative navigational menu entry for \ref EnterCallback(), to execute the enter callback function of the current menu. */
-	#define MENU_ENTER          Menu_GetCurrentMenu()->EnterCallback()
+	#define MENU_ENTER          Menu_GetCurrentMenu()->EnterCallback
 
     /** Relative navigational menu entry for \ref SelectCallback(), to execute the select callback function of the current menu. */
-	#define MENU_SELECT         Menu_GetCurrentMenu()->SelectCallback()
+	#define MENU_SELECT         Menu_GetCurrentMenu()->SelectCallback
     
     /** Relative navigational menu entry for \ref RenderCallback(), to execute the render callback function of the current menu. */
-	#define MENU_RENDER           Menu_GetCurrentMenu()->RenderCallback()
+	#define MENU_RENDER           Menu_GetCurrentMenu()->RenderCallback
     
 	/** Null menu entry, used in \ref MENU_ITEM() definitions where no menu link is to be made. */
 	extern Menu_Item_t NULL_MENU;

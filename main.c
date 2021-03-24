@@ -115,10 +115,10 @@ int main(void)
         if(millisMenuCallback > 200){
             millisMenuCallback = 0;
             if(button1_longPressed == true){
-                MENU_SELECT;
+                MENU_SELECT();
             }
             if(button2_longPressed == true){
-                MENU_ENTER;
+                MENU_ENTER();
             }
         }
         
