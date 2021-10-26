@@ -1,3 +1,5 @@
+#include <p24FJ256GA702.h>
+
 #include "i2c_lcd_dma_impl.h"
 #include "mcc_generated_files/dma.h"
 
@@ -5,6 +7,7 @@ bool isDmaSending = false;
 
 void DMA_Channel0_CallBack(void){
     isDmaSending = false;
+    I2C1CON1bits.PEN = 1;
 }
 
 bool LCD_IsDMASending(void){
